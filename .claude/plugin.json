@@ -1,0 +1,30 @@
+{
+  "name": "font-downloader",
+  "displayName": "Font Downloader",
+  "version": "1.0.0",
+  "description": "Download Pretendard fonts with automatic path detection for Next.js and Expo projects",
+  "author": {
+    "name": "SoftwayApp",
+    "email": "dev@softwayapp.com"
+  },
+  "homepage": "https://github.com/softwayapp/market-place",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/softwayapp/market-place"
+  },
+  "license": "MIT",
+  "keywords": ["fonts", "pretendard", "typography", "nextjs", "expo"],
+  "main": "./",
+  "commands": {
+    "font": {
+      "description": "Download Pretendard fonts",
+      "file": "./commands/font.md"
+    }
+  },
+  "skills": {
+    "font-download": {
+      "description": "Font download skill",
+      "path": "./skills/frontend/font-download"
+    }
+  }
+}
