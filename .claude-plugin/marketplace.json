@@ -1,0 +1,87 @@
+{
+  "marketplace": {
+    "id": "internal-marketplace",
+    "name": "Internal Skills Marketplace",
+    "description": "Enterprise-grade Claude Code skills for internal development workflows",
+    "organization": "Your Organization",
+    "maintainers": [
+      {
+        "name": "DevOps Team",
+        "email": "devops@yourcompany.com",
+        "github": "your-org"
+      }
+    ],
+    "support": {
+      "email": "dev-support@yourcompany.com",
+      "slack": "#claude-code-marketplace",
+      "wiki": "https://wiki.yourcompany.com/claude-marketplace"
+    }
+  },
+  "catalog": {
+    "lastUpdated": "2025-01-05T00:00:00Z",
+    "totalSkills": 25,
+    "totalAgents": 14,
+    "totalCommands": 22,
+    "categories": {
+      "backend": {
+        "name": "Backend Development",
+        "description": "API generation, database migrations, performance optimization",
+        "skillCount": 4,
+        "icon": "🔧"
+      },
+      "frontend": {
+        "name": "Frontend Development",
+        "description": "Component generation, accessibility, responsive design, font management",
+        "skillCount": 5,
+        "icon": "🎨"
+      },
+      "security": {
+        "name": "Security",
+        "description": "Vulnerability scanning, code auditing, dependency checks",
+        "skillCount": 4,
+        "icon": "🔒"
+      },
+      "quality": {
+        "name": "Code Quality",
+        "description": "Testing, code review, refactoring assistance",
+        "skillCount": 4,
+        "icon": "🧪"
+      },
+      "devops": {
+        "name": "DevOps",
+        "description": "CI/CD, containerization, infrastructure automation",
+        "skillCount": 4,
+        "icon": "🚀"
+      },
+      "documentation": {
+        "name": "Documentation",
+        "description": "API docs, README generation, changelog automation",
+        "skillCount": 4,
+        "icon": "📝"
+      }
+    }
+  },
+  "installation": {
+    "command": "/plugin marketplace add your-org/internal-marketplace",
+    "scopes": ["user", "project", "local"],
+    "requirements": {
+      "claudeCode": ">=1.0.0",
+      "node": ">=16.0.0",
+      "git": ">=2.0.0"
+    }
+  },
+  "features": {
+    "autoSync": true,
+    "versionControl": true,
+    "skillValidation": true,
+    "analytics": false,
+    "privateMarketplace": true
+  },
+  "metadata": {
+    "tags": ["enterprise", "internal", "automation", "productivity"],
+    "visibility": "private",
+    "license": "MIT",
+    "createdAt": "2025-01-05T00:00:00Z",
+    "updatedAt": "2025-01-05T00:00:00Z"
+  }
+}

@@ -1,0 +1,125 @@
+name: Validate Skills
+
+on:
+  pull_request:
+    paths:
+      - 'skills/**'
+      - 'agents/**'
+      - 'commands/**'
+      - '.claude-plugin/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'skills/**'
+      - 'agents/**'
+      - 'commands/**'
+
+jobs:
+  validate:
+    name: Validate Skill Structure
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          npm install -g js-yaml
+          npm install -g markdown-link-check
+
+      - name: Validate SKILL.md files
+        run: |
+          chmod +x scripts/validate-skills.sh
+          ./scripts/validate-skills.sh
+
+      - name: Check for required metadata
+        run: |
+          for skill in skills/*/*/SKILL.md; do
+            echo "Checking $skill"
+
+            # Check for required frontmatter
+            if ! grep -q "^---" "$skill"; then
+              echo "❌ Missing frontmatter in $skill"
+              exit 1
+            fi
+
+            # Check for required fields
+            if ! grep -q "name:" "$skill"; then
+              echo "❌ Missing 'name' field in $skill"
+              exit 1
+            fi
+
+            if ! grep -q "description:" "$skill"; then
+              echo "❌ Missing 'description' field in $skill"
+              exit 1
+            fi
+
+            if ! grep -q "version:" "$skill"; then
+              echo "❌ Missing 'version' field in $skill"
+              exit 1
+            fi
+
+            echo "✅ $skill is valid"
+          done
+
+      - name: Validate markdown links
+        run: |
+          find . -name "*.md" -exec markdown-link-check {} \;
+        continue-on-error: true
+
+      - name: Check file naming conventions
+        run: |
+          # Check that all skill directories follow naming convention
+          for dir in skills/*/*; do
+            if [ -d "$dir" ]; then
+              dirname=$(basename "$dir")
+              if [[ ! "$dirname" =~ ^[a-z0-9-]+$ ]]; then
+                echo "❌ Invalid directory name: $dirname (must be lowercase with hyphens)"
+                exit 1
+              fi
+            fi
+          done
+          echo "✅ All directory names are valid"
+
+      - name: Validate plugin.json
+        run: |
+          if [ -f ".claude-plugin/plugin.json" ]; then
+            node -e "
+              const fs = require('fs');
+              const plugin = JSON.parse(fs.readFileSync('.claude-plugin/plugin.json', 'utf8'));
+
+              if (!plugin.name || !plugin.version || !plugin.description) {
+                console.error('❌ plugin.json missing required fields');
+                process.exit(1);
+              }
+
+              console.log('✅ plugin.json is valid');
+            "
+          fi
+
+      - name: Generate validation report
+        if: always()
+        run: |
+          echo "# Validation Report" > validation-report.md
+          echo "" >> validation-report.md
+          echo "**Date**: $(date)" >> validation-report.md
+          echo "**Commit**: ${{ github.sha }}" >> validation-report.md
+          echo "" >> validation-report.md
+          echo "## Summary" >> validation-report.md
+          echo "- Total skills: $(find skills -name 'SKILL.md' | wc -l)" >> validation-report.md
+          echo "- Total agents: $(find agents -name 'AGENT.md' | wc -l)" >> validation-report.md
+          echo "- Total commands: $(find commands -name '*.md' | wc -l)" >> validation-report.md
+
+      - name: Upload validation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-report
+          path: validation-report.md

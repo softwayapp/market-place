@@ -1,0 +1,50 @@
+MIT License
+
+Copyright (c) 2025 [Your Organization Name]
+
+INTERNAL USE ONLY - NOT FOR PUBLIC DISTRIBUTION
+
+Permission is hereby granted, free of charge, to any person within
+[Your Organization Name] obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use, copy, modify,
+merge, publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so, subject
+to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+ADDITIONAL TERMS FOR INTERNAL USE:
+
+1. CONFIDENTIALITY: This software contains proprietary information and trade
+   secrets of [Your Organization Name]. Unauthorized disclosure, copying, or
+   distribution outside of [Your Organization Name] is strictly prohibited.
+
+2. SCOPE OF USE: This software is licensed exclusively for use within
+   [Your Organization Name]'s internal operations and development workflows.
+
+3. MODIFICATIONS: Internal modifications are permitted and encouraged for
+   improving organizational workflows.
+
+4. EXTERNAL DISTRIBUTION: No part of this software may be distributed,
+   published, or made available outside of [Your Organization Name] without
+   explicit written permission from the Legal Department.
+
+5. THIRD-PARTY COMPONENTS: Some skills may incorporate third-party libraries
+   or components. See THIRD_PARTY_NOTICES.md for details.
+
+6. TERMINATION: This license terminates automatically upon termination of
+   employment or contractor relationship with [Your Organization Name].
+
+For licensing questions, contact: legal@yourcompany.com
