@@ -1,653 +1,193 @@
-# 🏪 사내 Claude Code 마켓플레이스
+# 🏪 SoftwayApp Development Marketplace
 
-> 조직 맞춤형 AI Agent Skills, Commands, Agents 중앙 저장소
+> Complete development toolkit for Claude Code with 32+ skills, 4 commands, and 3 agents
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude-Code-blueviolet)](https://code.claude.com)
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 ---
 
-## 📋 목차
+## 🚀 Quick Install
 
-- [소개](#소개)
-- [주요 기능](#주요-기능)
-- [시작하기](#시작하기)
-  - [전제 조건](#전제-조건)
-  - [설치 방법](#설치-방법)
-- [마켓플레이스 구조](#마켓플레이스-구조)
-- [사용 가능한 스킬](#사용-가능한-스킬)
-- [스킬 생성 가이드](#스킬-생성-가이드)
-- [기여 방법](#기여-방법)
-- [문서](#문서)
-- [라이선스](#라이선스)
-- [지원 및 문의](#지원-및-문의)
-
----
-
-## 소개
-
-이 저장소는 조직 내부에서 사용하는 **Claude Code Agent Skills**의 중앙 마켓플레이스입니다.
-개발 워크플로우를 향상시키고, 반복 작업을 자동화하며, 팀 전체의 생산성을 높이기 위해 설계되었습니다.
-
-### 왜 사내 마켓플레이스가 필요한가요?
-
-- **🎯 조직 맞춤화**: 회사의 특정 개발 프로세스와 도구에 최적화된 스킬
-- **🔒 보안 및 프라이버시**: 내부 시스템과 프로세스에 대한 민감한 정보 보호
-- **📚 지식 공유**: 팀 간 best practices와 자동화 패턴 공유
-- **⚡ 생산성 향상**: 반복적인 작업을 자동화하고 일관된 품질 유지
-- **🔄 지속적 개선**: 팀의 피드백을 통한 지속적인 스킬 개선
-
----
-
-## 주요 기능
-
-### 📦 Skills (24개)
-모델이 자동으로 호출하는 컨텍스트 기반 기능
-- 코드 분석 및 리뷰 자동화
-- 테스트 생성 및 실행
-- 문서 자동 생성
-- 보안 스캔 및 취약점 분석
-
-### 🤖 Agents (14개)
-특화된 작업을 위한 전문 에이전트
-- 백엔드/프론트엔드 아키텍트
-- 성능 최적화 엔지니어
-- 보안 감사 전문가
-- DevOps 자동화 에이전트
-
-### ⚡ Commands (21개)
-사용자가 명시적으로 호출하는 슬래시 커맨드
-- `/analyze` - 코드 품질 분석
-- `/test` - 테스트 실행 및 커버리지
-- `/deploy` - 배포 자동화
-- `/document` - 문서 생성
-
-### 🔌 MCP Servers
-Model Context Protocol 통합
-- **Context7**: 공식 문서 조회
-- **Sequential**: 복잡한 추론
-- **Magic**: UI 컴포넌트 생성
-- **Serena**: 프로젝트 메모리 관리
-
----
-
-## 시작하기
-
-### 전제 조건
-
-- **Claude Code CLI**: v1.0.0 이상
-- **Git**: 버전 관리
-- **Node.js** (선택): JavaScript 기반 스킬의 경우
-- **Python 3.8+** (선택): Python 기반 스킬의 경우
-
-### 설치 방법
-
-#### 방법 1: Claude Code Plugin 시스템을 통한 설치 (권장)
+### macOS / Linux
 
 ```bash
-# 1. 마켓플레이스 추가
-/plugin marketplace add [조직명]/internal-marketplace
-
-# 2. 플러그인 브라우징
-/plugin
-
-# 3. 원하는 스킬 세트 선택 및 설치
-# UI에서 Browse and install plugins 선택
-# internal-marketplace 선택
-# 설치할 스킬 카테고리 선택 (예: backend-skills, frontend-skills)
-# "Install now" 클릭
+curl -fsSL https://raw.githubusercontent.com/softwayapp/market-place/main/install.sh | bash
 ```
 
-#### 방법 2: 직접 설치
+### Windows (PowerShell)
+
+```powershell
+irm https://raw.githubusercontent.com/softwayapp/market-place/main/install.ps1 | iex
+```
+
+### Manual Installation
 
 ```bash
-# 전체 마켓플레이스 클론
-git clone https://github.com/[조직명]/internal-marketplace.git ~/.claude/marketplaces/internal
+# Clone to Claude Code plugins directory
+git clone https://github.com/softwayapp/market-place.git ~/.claude/plugins/softwayapp-marketplace
 
-# 특정 스킬만 설치
-/plugin install backend-skills@internal-marketplace
-/plugin install security-audit@internal-marketplace
-```
-
-#### 방법 3: 프로젝트별 설치
-
-프로젝트 루트에 `.claude/settings.json` 생성:
-
-```json
-{
-  "plugins": [
-    {
-      "name": "internal-marketplace",
-      "source": "github:[조직명]/internal-marketplace",
-      "skills": ["code-review", "test-generator"],
-      "enabled": true
-    }
-  ]
-}
+# Restart Claude Code
 ```
 
 ---
 
-## 마켓플레이스 구조
+## 📦 What's Included
 
-```
-internal-marketplace/
-├── .claude-plugin/
-│   ├── plugin.json              # 마켓플레이스 메타데이터
-│   └── marketplace.json         # 스킬 카탈로그
-│
-├── skills/                      # Agent Skills 디렉토리
-│   ├── backend/                 # 백엔드 개발 스킬
-│   │   ├── api-generator/
-│   │   │   └── SKILL.md
-│   │   ├── database-migration/
-│   │   │   └── SKILL.md
-│   │   └── performance-optimizer/
-│   │       └── SKILL.md
-│   │
-│   ├── frontend/                # 프론트엔드 개발 스킬
-│   │   ├── component-generator/
-│   │   │   └── SKILL.md
-│   │   ├── accessibility-audit/
-│   │   │   └── SKILL.md
-│   │   └── responsive-design/
-│   │       └── SKILL.md
-│   │
-│   ├── devops/                  # DevOps 스킬
-│   │   ├── ci-cd-setup/
-│   │   │   └── SKILL.md
-│   │   ├── docker-optimizer/
-│   │   │   └── SKILL.md
-│   │   └── k8s-deployment/
-│   │       └── SKILL.md
-│   │
-│   ├── security/                # 보안 스킬
-│   │   ├── vulnerability-scan/
-│   │   │   └── SKILL.md
-│   │   ├── code-security-audit/
-│   │   │   └── SKILL.md
-│   │   └── dependency-check/
-│   │       └── SKILL.md
-│   │
-│   └── quality/                 # 코드 품질 스킬
-│       ├── code-review/
-│       │   └── SKILL.md
-│       ├── test-generator/
-│       │   └── SKILL.md
-│       └── refactoring-assistant/
-│           └── SKILL.md
-│
-├── agents/                      # Specialized Agents
-│   ├── backend-architect/
-│   │   └── AGENT.md
-│   ├── performance-engineer/
-│   │   └── AGENT.md
-│   └── security-auditor/
-│       └── AGENT.md
-│
-├── commands/                    # Slash Commands
-│   ├── analyze.md
-│   ├── deploy.md
-│   └── test.md
-│
-├── docs/                        # 문서
-│   ├── getting-started.md
-│   ├── skill-development.md
-│   ├── best-practices.md
-│   └── examples/
-│
-├── scripts/                     # 유틸리티 스크립트
-│   ├── sync-marketplace.sh      # 마켓플레이스 동기화
-│   ├── validate-skills.sh       # 스킬 검증
-│   └── generate-catalog.sh      # 카탈로그 생성
-│
-├── .github/
-│   └── workflows/
-│       ├── sync-skills.yml      # 자동 동기화
-│       ├── validate-pr.yml      # PR 검증
-│       └── publish.yml          # 배포 자동화
-│
-├── README.md                    # 이 파일
-├── CONTRIBUTING.md              # 기여 가이드
-├── LICENSE                      # 라이선스
-└── CHANGELOG.md                 # 변경 이력
-```
+### 🎯 Commands (4)
+
+| Command | Description |
+|---------|-------------|
+| `/font` | Download Pretendard fonts with auto path detection |
+| `/analyze` | Comprehensive code quality analysis |
+| `/test` | Execute tests with coverage analysis |
+| `/deploy` | Automated deployment workflows |
+
+### 🛠️ Skills (32+)
+
+#### 🔧 Backend (6 skills)
+- API Generator - REST API scaffolding
+- Database Migration - Migration management
+- Performance Optimizer - Performance tuning
+- Error Handler - Error handling patterns
+- Clean Architecture - Architecture scaffolding
+- CQRS Generator - CQRS pattern implementation
+
+#### 🎨 Frontend (5 skills)
+- **Font Downloader** - Pretendard font installation
+- Component Generator - UI component scaffolding
+- Accessibility Audit - WCAG compliance checking
+- Responsive Design - Responsive layout helpers
+- State Management - State management patterns
+
+#### 🔒 Security (4 skills)
+- Vulnerability Scan - Security vulnerability detection
+- Code Security Audit - Code security analysis
+- Dependency Check - Dependency vulnerability scanning
+- Secrets Detection - Secret detection in code
+
+#### 🧪 Quality (4 skills)
+- Test Generator - Automated test generation
+- E2E Test Builder - End-to-end test creation
+- Coverage Analyzer - Test coverage analysis
+- Mock Data Generator - Test data generation
+
+#### 🚀 DevOps (5 skills)
+- CI/CD Setup - CI/CD pipeline configuration
+- Docker Optimizer - Docker optimization
+- Kubernetes Deployment - K8s deployment automation
+- Monitoring Setup - Monitoring configuration
+- Project Init Pipeline - Project initialization
+
+#### 📝 Documentation (4 skills)
+- API Docs Generator - API documentation generation
+- README Generator - README file generation
+- Changelog Generator - Changelog automation
+- JSDoc Generator - JavaScript documentation
+
+### 🤖 Agents (3)
+
+- **Backend Architect** - Backend system design
+- **Performance Engineer** - Performance optimization
+- **Security Auditor** - Security assessment
 
 ---
 
-## 사용 가능한 스킬
+## 💻 Usage
 
-### 🔧 백엔드 개발 (Backend Development)
-
-| 스킬 이름 | 설명 | 버전 | 상태 |
-|----------|------|------|------|
-| `api-generator` | RESTful API 자동 생성 및 문서화 | 1.2.0 | ✅ 안정 |
-| `database-migration` | 데이터베이스 마이그레이션 자동 생성 | 1.1.0 | ✅ 안정 |
-| `performance-optimizer` | 백엔드 성능 최적화 분석 및 제안 | 1.0.5 | ✅ 안정 |
-| `error-handler` | 에러 처리 패턴 자동 적용 | 0.9.0 | 🚧 베타 |
-
-### 🎨 프론트엔드 개발 (Frontend Development)
-
-| 스킬 이름 | 설명 | 버전 | 상태 |
-|----------|------|------|------|
-| `component-generator` | React/Vue 컴포넌트 생성 | 2.0.0 | ✅ 안정 |
-| `accessibility-audit` | WCAG 2.1 접근성 자동 검사 | 1.3.0 | ✅ 안정 |
-| `responsive-design` | 반응형 디자인 패턴 적용 | 1.1.0 | ✅ 안정 |
-| `state-management` | 상태 관리 패턴 자동 구현 | 1.0.0 | ✅ 안정 |
-
-### 🔒 보안 (Security)
-
-| 스킬 이름 | 설명 | 버전 | 상태 |
-|----------|------|------|------|
-| `vulnerability-scan` | OWASP Top 10 취약점 스캔 | 1.4.0 | ✅ 안정 |
-| `code-security-audit` | 코드 보안 감사 자동화 | 1.2.0 | ✅ 안정 |
-| `dependency-check` | 의존성 취약점 검사 | 1.1.0 | ✅ 안정 |
-| `secrets-detection` | 하드코딩된 비밀번호/키 탐지 | 1.0.0 | ✅ 안정 |
-
-### 🧪 테스팅 (Testing)
-
-| 스킬 이름 | 설명 | 버전 | 상태 |
-|----------|------|------|------|
-| `test-generator` | 단위/통합 테스트 자동 생성 | 1.5.0 | ✅ 안정 |
-| `e2e-test-builder` | E2E 테스트 시나리오 생성 | 1.2.0 | ✅ 안정 |
-| `coverage-analyzer` | 코드 커버리지 분석 및 개선 | 1.1.0 | ✅ 안정 |
-| `mock-data-generator` | 테스트용 모의 데이터 생성 | 1.0.0 | ✅ 안정 |
-
-### 🚀 DevOps
-
-| 스킬 이름 | 설명 | 버전 | 상태 |
-|----------|------|------|------|
-| `ci-cd-setup` | CI/CD 파이프라인 자동 구성 | 2.0.0 | ✅ 안정 |
-| `docker-optimizer` | Docker 이미지 최적화 | 1.3.0 | ✅ 안정 |
-| `k8s-deployment` | Kubernetes 배포 매니페스트 생성 | 1.1.0 | ✅ 안정 |
-| `monitoring-setup` | 모니터링 및 로깅 설정 | 1.0.0 | ✅ 안정 |
-
-### 📝 문서화 (Documentation)
-
-| 스킬 이름 | 설명 | 버전 | 상태 |
-|----------|------|------|------|
-| `api-docs-generator` | API 문서 자동 생성 | 1.4.0 | ✅ 안정 |
-| `readme-generator` | README.md 자동 생성 | 1.2.0 | ✅ 안정 |
-| `changelog-generator` | CHANGELOG.md 자동 생성 | 1.1.0 | ✅ 안정 |
-| `jsdoc-generator` | JSDoc/TSDoc 주석 자동 생성 | 1.0.0 | ✅ 안정 |
-
----
-
-## 스킬 생성 가이드
-
-### 기본 구조
-
-각 스킬은 독립적인 폴더에 `SKILL.md` 파일을 포함해야 합니다:
-
-```markdown
----
-name: my-custom-skill
-description: 이 스킬이 하는 일과 언제 사용되는지 명확하게 설명
-version: 1.0.0
-author: 팀명 또는 작성자 이메일
-tags: [backend, api, automation]
-allowed-tools: [Read, Write, Grep, Bash]
-triggers:
-  - "API 생성"
-  - "엔드포인트 만들기"
-  - "REST API"
----
-
-# My Custom Skill
-
-## 목적
-
-이 스킬의 구체적인 목적과 해결하는 문제를 설명합니다.
-
-## 사용 시기
-
-- 시나리오 1: API 엔드포인트를 생성할 때
-- 시나리오 2: 데이터베이스 스키마에서 CRUD 작업을 자동 생성할 때
-
-## 작동 방식
-
-1. 데이터베이스 스키마 분석
-2. 표준 REST API 패턴에 따라 엔드포인트 생성
-3. 입력 검증 및 에러 처리 추가
-4. API 문서 자동 생성
-
-## 예제
-
-### 사용 예제 1
-```
-사용자: "User 모델에 대한 REST API를 생성해줘"
-
-스킬 동작:
-1. models/User.js 파일 읽기
-2. 표준 CRUD 엔드포인트 생성
-3. 입력 검증 미들웨어 추가
-4. Swagger 문서 생성
-```
-
-### 사용 예제 2
-```
-사용자: "Product API에 페이지네이션 추가"
-
-스킬 동작:
-1. 기존 Product API 분석
-2. 페이지네이션 파라미터 추가
-3. 응답 형식 업데이트
-4. 문서 업데이트
-```
-
-## 가이드라인
-
-### 이 스킬을 사용할 때
-- ✅ 새로운 API 엔드포인트 생성 시
-- ✅ 기존 API에 표준 기능 추가 시
-- ✅ API 문서화 필요 시
-
-### 이 스킬을 사용하지 않을 때
-- ❌ 복잡한 비즈니스 로직 구현 시
-- ❌ 프론트엔드 코드 작성 시
-- ❌ 데이터베이스 마이그레이션 작성 시
-
-## 출력 형식
-
-생성된 파일들:
-- `routes/user.routes.js` - 라우팅 정의
-- `controllers/user.controller.js` - 컨트롤러 로직
-- `validators/user.validator.js` - 입력 검증
-- `docs/api/user.md` - API 문서
-
-## 의존성
-
-- Express.js 4.x+
-- express-validator 6.x+
-- Swagger JSDoc 6.x+
-
-## 설정
-
-프로젝트 루트에 `.skillconfig.json` 생성:
-
-```json
-{
-  "apiGenerator": {
-    "framework": "express",
-    "outputDir": "src/api",
-    "useTypeScript": true,
-    "authMiddleware": true
-  }
-}
-```
-
-## 제한사항
-
-- GraphQL API는 지원하지 않음
-- gRPC 서비스 생성 불가
-- 복잡한 인증 로직은 수동 구현 필요
-
-## 버전 이력
-
-- **1.0.0** (2024-01-15): 초기 릴리스
-  - 기본 CRUD 엔드포인트 생성
-  - Swagger 문서 자동 생성
-
-## 기여자
-
-- 홍길동 (gildong@company.com) - 초기 개발
-- 김철수 (chulsoo@company.com) - 검증 로직 추가
-
-## 라이선스
-
-MIT License - 조직 내부 사용 전용
-```
-
-### 스킬 메타데이터 필드 설명
-
-| 필드 | 필수 | 설명 |
-|------|------|------|
-| `name` | ✅ | 스킬의 고유 식별자 (소문자, 하이픈 사용) |
-| `description` | ✅ | 스킬의 목적과 사용 시기를 명확히 설명 |
-| `version` | ✅ | 시맨틱 버저닝 (MAJOR.MINOR.PATCH) |
-| `author` | ✅ | 작성자 또는 팀 정보 |
-| `tags` | ⚪ | 검색 및 분류를 위한 태그 |
-| `allowed-tools` | ⚪ | 스킬이 사용할 수 있는 도구 목록 |
-| `triggers` | ⚪ | 스킬을 활성화하는 키워드/패턴 |
-
-### 스킬 검증 체크리스트
-
-스킬을 제출하기 전에 다음 항목을 확인하세요:
-
-- [ ] SKILL.md 파일에 모든 필수 메타데이터 포함
-- [ ] 명확하고 구체적인 설명과 예제 제공
-- [ ] 사용 시기와 사용하지 않을 시기 명시
-- [ ] 의존성 및 설정 요구사항 문서화
-- [ ] 테스트 케이스 포함 (가능한 경우)
-- [ ] 팀 코딩 스타일 가이드 준수
-- [ ] 보안 취약점 검토 완료
-- [ ] 라이선스 정보 포함
-
----
-
-## 기여 방법
-
-### 1. 이슈 생성
-
-새로운 스킬을 제안하거나 버그를 보고하려면:
-
-```
-제목: [새 스킬] API 캐싱 자동화 스킬
-라벨: enhancement, skill-request
-
-설명:
-- 목적: Redis를 사용한 API 응답 캐싱 자동화
-- 사용 사례: 자주 조회되는 데이터의 성능 개선
-- 예상 트리거: "API 캐싱", "Redis 캐시 추가"
-```
-
-### 2. 브랜치 전략
+### Font Download Example
 
 ```bash
-# 기능 브랜치 생성
-git checkout -b feature/cache-automation-skill
+# Auto-detect project type and download
+/font
 
-# 버그 수정 브랜치
-git checkout -b fix/api-generator-validation
+# Custom path
+/font public/fonts
 
-# 문서 개선 브랜치
-git checkout -b docs/improve-setup-guide
+# Natural language
+"Download Pretendard fonts"
 ```
 
-### 3. 개발 프로세스
+### Code Analysis Example
 
 ```bash
-# 1. 저장소 포크 및 클론
-git clone https://github.com/[조직명]/internal-marketplace.git
-cd internal-marketplace
+# Analyze current file
+/analyze
 
-# 2. 브랜치 생성
-git checkout -b feature/my-new-skill
-
-# 3. 스킬 개발
-mkdir -p skills/my-category/my-new-skill
-cd skills/my-category/my-new-skill
-# SKILL.md 작성
-
-# 4. 검증
-../../scripts/validate-skills.sh
-
-# 5. 커밋
-git add .
-git commit -m "feat: Add cache automation skill for Redis integration"
-
-# 6. 푸시 및 PR 생성
-git push origin feature/my-new-skill
+# Full project analysis
+/analyze --full
 ```
 
-### 4. Pull Request 템플릿
-
-```markdown
-## 변경 사항 요약
-<!-- 무엇을 변경했는지 간단히 설명 -->
-
-## 변경 유형
-- [ ] 새로운 스킬 추가
-- [ ] 기존 스킬 개선
-- [ ] 버그 수정
-- [ ] 문서 개선
-- [ ] 기타: ___________
-
-## 체크리스트
-- [ ] SKILL.md에 모든 필수 필드 포함
-- [ ] 예제 및 사용 가이드 작성
-- [ ] 로컬에서 테스트 완료
-- [ ] 문서 업데이트 (필요한 경우)
-- [ ] CHANGELOG.md 업데이트
-
-## 테스트 방법
-<!-- 이 스킬을 어떻게 테스트할 수 있는지 설명 -->
-
-## 관련 이슈
-<!-- Closes #123 형식으로 관련 이슈 연결 -->
-
-## 스크린샷 (선택사항)
-<!-- 스킬 동작을 보여주는 스크린샷 또는 GIF -->
-```
-
-### 5. 코드 리뷰 프로세스
-
-1. **자동 검증**: GitHub Actions가 자동으로 스킬 유효성 검사
-2. **피어 리뷰**: 최소 2명의 팀원이 리뷰 및 승인
-3. **보안 검토**: 보안팀의 승인 (보안 관련 스킬의 경우)
-4. **병합**: 승인 후 메인 브랜치에 병합
-
-### 6. 릴리스 프로세스
+### Test Execution Example
 
 ```bash
-# 1. 버전 태그 생성
-git tag -a v1.2.0 -m "Release v1.2.0: Add cache automation skill"
+# Run all tests
+/test
 
-# 2. 태그 푸시
-git push origin v1.2.0
-
-# 3. GitHub Actions가 자동으로:
-#    - 릴리스 노트 생성
-#    - 마켓플레이스 카탈로그 업데이트
-#    - 팀에 알림 발송
+# With coverage
+/test --coverage
 ```
 
 ---
 
-## 문서
+## 🔄 Update
 
-### 📚 주요 문서
+```bash
+cd ~/.claude/plugins/softwayapp-marketplace
+git pull origin main
+```
 
-- **[시작 가이드](docs/getting-started.md)**: 초보자를 위한 단계별 설치 및 사용 가이드
-- **[스킬 개발](docs/skill-development.md)**: 커스텀 스킬 작성 방법
-- **[Best Practices](docs/best-practices.md)**: 스킬 작성 및 사용 모범 사례
-- **[API 레퍼런스](docs/api-reference.md)**: 마켓플레이스 API 문서
-- **[FAQ](docs/faq.md)**: 자주 묻는 질문
-- **[트러블슈팅](docs/troubleshooting.md)**: 일반적인 문제 해결 방법
-
-### 🎓 튜토리얼
-
-- **[첫 스킬 만들기](docs/tutorials/first-skill.md)**: 간단한 스킬 작성 튜토리얼
-- **[고급 스킬 패턴](docs/tutorials/advanced-patterns.md)**: 복잡한 스킬 구현 방법
-- **[MCP 서버 통합](docs/tutorials/mcp-integration.md)**: MCP 서버와의 통합 가이드
-- **[테스팅 전략](docs/tutorials/testing-skills.md)**: 스킬 테스트 작성 방법
-
-### 📖 예제
-
-- **[Backend Examples](docs/examples/backend/)**: 백엔드 스킬 예제 모음
-- **[Frontend Examples](docs/examples/frontend/)**: 프론트엔드 스킬 예제 모음
-- **[DevOps Examples](docs/examples/devops/)**: DevOps 스킬 예제 모음
+Then restart Claude Code.
 
 ---
 
-## 라이선스
+## 📚 Documentation
 
-이 프로젝트는 **MIT License**로 라이선스되어 있으며, **조직 내부 사용 전용**입니다.
+### Skill Categories
+
+Explore skills by browsing the `skills/` directory:
 
 ```
-MIT License
+skills/
+├── backend/       # Backend development
+├── frontend/      # Frontend development
+├── devops/        # DevOps automation
+├── security/      # Security tools
+├── quality/       # Code quality
+└── documentation/ # Documentation generation
+```
 
-Copyright (c) 2025 [조직명]
+### Command Reference
 
-조직 내부 사용 전용. 외부 배포 및 공유 금지.
+All commands are in `commands/`:
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-[전체 라이선스 텍스트는 LICENSE 파일 참조]
+```
+commands/
+├── font.md     # Font downloader
+├── analyze.md  # Code analyzer
+├── test.md     # Test runner
+└── deploy.md   # Deployment automation
 ```
 
 ---
 
-## 지원 및 문의
+## 🤝 Contributing
 
-### 🤝 도움이 필요하신가요?
-
-- **📧 이메일**: dev-support@company.com
-- **💬 Slack**: #claude-code-marketplace
-- **📝 이슈 트래커**: [GitHub Issues](https://github.com/[조직명]/internal-marketplace/issues)
-- **📖 위키**: [Internal Wiki](https://wiki.company.com/claude-marketplace)
-
-### 🐛 버그 리포트
-
-버그를 발견하셨다면 [이슈를 생성](https://github.com/[조직명]/internal-marketplace/issues/new?template=bug_report.md)해주세요.
-
-### 💡 기능 제안
-
-새로운 기능이나 개선사항을 제안하려면 [기능 요청 이슈](https://github.com/[조직명]/internal-marketplace/issues/new?template=feature_request.md)를 생성해주세요.
-
-### 📊 마켓플레이스 통계
-
-- **총 스킬 수**: 24
-- **활성 기여자**: 12
-- **평균 업데이트 주기**: 주 1회
-- **최근 업데이트**: 2025-01-05
+This is an internal marketplace. Contact the development team for contributions.
 
 ---
 
-## 🙏 감사의 말
+## 📄 License
 
-이 마켓플레이스는 다음 오픈소스 프로젝트들의 영향을 받았습니다:
-
-- [Anthropic Skills](https://github.com/anthropics/skills) - Agent Skills 표준
-- [Claude Code Documentation](https://code.claude.com/docs) - 공식 문서
-- [SkillsMP](https://skillsmp.com) - 커뮤니티 마켓플레이스
+MIT License - See [LICENSE](LICENSE) for details
 
 ---
 
-## 📈 로드맵
+## 🆘 Support
 
-### 2025 Q1
-- [ ] 기본 스킬 24개 완성
-- [ ] 자동 동기화 워크플로우 구축
-- [ ] 스킬 검증 자동화
-
-### 2025 Q2
-- [ ] MCP 서버 통합 강화
-- [ ] 스킬 테스팅 프레임워크
-- [ ] 성능 모니터링 대시보드
-
-### 2025 Q3
-- [ ] 고급 분석 스킬 추가
-- [ ] 다국어 지원
-- [ ] 버전 관리 개선
-
-### 2025 Q4
-- [ ] AI 기반 스킬 추천 시스템
-- [ ] 엔터프라이즈 기능 추가
-- [ ] 크로스 플랫폼 지원
+- **Issues**: [GitHub Issues](https://github.com/softwayapp/market-place/issues)
+- **Email**: dev@softwayapp.com
 
 ---
 
-<div align="center">
-
-**Made with ❤️ by [조직명] Development Team**
-
-[홈페이지](https://www.company.com) • [문서](docs/) • [기여하기](CONTRIBUTING.md) • [변경이력](CHANGELOG.md)
-
-</div>
+**Made with ❤️ by SoftwayApp Development Team**

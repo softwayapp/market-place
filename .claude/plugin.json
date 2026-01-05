@@ -1,8 +1,8 @@
 {
-  "name": "font-downloader",
-  "displayName": "Font Downloader",
+  "name": "softwayapp-marketplace",
+  "displayName": "SoftwayApp Development Marketplace",
   "version": "1.0.0",
-  "description": "Download Pretendard fonts with automatic path detection for Next.js and Expo projects",
+  "description": "Complete development toolkit with 32+ skills, 4 commands, and 3 agents for enterprise workflows",
   "author": {
     "name": "SoftwayApp",
     "email": "dev@softwayapp.com"
@@ -13,18 +13,9 @@
     "url": "https://github.com/softwayapp/market-place"
   },
   "license": "MIT",
-  "keywords": ["fonts", "pretendard", "typography", "nextjs", "expo"],
+  "keywords": ["development", "automation", "skills", "enterprise", "marketplace"],
   "main": "./",
-  "commands": {
-    "font": {
-      "description": "Download Pretendard fonts",
-      "file": "./commands/font.md"
-    }
-  },
-  "skills": {
-    "font-download": {
-      "description": "Font download skill",
-      "path": "./skills/frontend/font-download"
-    }
-  }
+  "commandsDir": "./commands",
+  "skillsDir": "./skills",
+  "agentsDir": "./agents"
 }
