@@ -1,32 +1,42 @@
 {
-  "name": "internal-marketplace",
+  "name": "market-place",
+  "owner": "softwayapp",
   "version": "1.0.0",
   "description": "Internal Claude Code Skills Marketplace for enterprise development workflows",
-  "author": "Your Organization Development Team",
+  "author": "SoftwayApp Development Team",
   "license": "MIT",
-  "homepage": "https://github.com/your-org/internal-marketplace",
+  "homepage": "https://github.com/softwayapp/market-place",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/internal-marketplace.git"
+    "url": "https://github.com/softwayapp/market-place.git"
   },
   "keywords": [
     "claude-code",
     "agent-skills",
     "marketplace",
     "automation",
-    "development-tools",
-    "internal"
+    "development-tools"
   ],
-  "categories": [
-    "backend",
-    "frontend",
-    "devops",
-    "security",
-    "quality",
-    "documentation"
-  ],
-  "skills": [
+  "plugins": [
     {
+      "type": "skill",
+      "id": "font-download",
+      "name": "Font Downloader (Pretendard)",
+      "category": "frontend",
+      "path": "skills/frontend/font-download",
+      "version": "1.0.0",
+      "status": "stable",
+      "description": "Download Pretendard fonts with automatic path detection"
+    },
+    {
+      "type": "command",
+      "id": "font",
+      "name": "font",
+      "path": "commands/font.md",
+      "description": "Download Pretendard fonts with automatic path detection"
+    },
+    {
+      "type": "skill",
       "id": "api-generator",
       "name": "API Generator",
       "category": "backend",
@@ -35,6 +45,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "database-migration",
       "name": "Database Migration",
       "category": "backend",
@@ -43,6 +54,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "performance-optimizer",
       "name": "Performance Optimizer",
       "category": "backend",
@@ -51,6 +63,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "error-handler",
       "name": "Error Handler",
       "category": "backend",
@@ -59,6 +72,7 @@
       "status": "beta"
     },
     {
+      "type": "skill",
       "id": "component-generator",
       "name": "Component Generator",
       "category": "frontend",
@@ -67,6 +81,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "accessibility-audit",
       "name": "Accessibility Audit",
       "category": "frontend",
@@ -75,6 +90,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "responsive-design",
       "name": "Responsive Design",
       "category": "frontend",
@@ -83,6 +99,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "state-management",
       "name": "State Management",
       "category": "frontend",
@@ -91,6 +108,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "vulnerability-scan",
       "name": "Vulnerability Scanner",
       "category": "security",
@@ -99,6 +117,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "code-security-audit",
       "name": "Code Security Audit",
       "category": "security",
@@ -107,6 +126,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "dependency-check",
       "name": "Dependency Check",
       "category": "security",
@@ -115,6 +135,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "secrets-detection",
       "name": "Secrets Detection",
       "category": "security",
@@ -123,6 +144,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "test-generator",
       "name": "Test Generator",
       "category": "quality",
@@ -131,6 +153,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "e2e-test-builder",
       "name": "E2E Test Builder",
       "category": "quality",
@@ -139,6 +162,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "coverage-analyzer",
       "name": "Coverage Analyzer",
       "category": "quality",
@@ -147,6 +171,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "mock-data-generator",
       "name": "Mock Data Generator",
       "category": "quality",
@@ -155,6 +180,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "ci-cd-setup",
       "name": "CI/CD Setup",
       "category": "devops",
@@ -163,6 +189,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "docker-optimizer",
       "name": "Docker Optimizer",
       "category": "devops",
@@ -171,6 +198,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "k8s-deployment",
       "name": "Kubernetes Deployment",
       "category": "devops",
@@ -179,6 +207,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "monitoring-setup",
       "name": "Monitoring Setup",
       "category": "devops",
@@ -187,6 +216,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "project-init-pipeline",
       "name": "Project Initialization Pipeline",
       "category": "devops",
@@ -195,6 +225,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "api-docs-generator",
       "name": "API Documentation Generator",
       "category": "documentation",
@@ -203,6 +234,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "readme-generator",
       "name": "README Generator",
       "category": "documentation",
@@ -211,6 +243,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "changelog-generator",
       "name": "CHANGELOG Generator",
       "category": "documentation",
@@ -219,6 +252,7 @@
       "status": "stable"
     },
     {
+      "type": "skill",
       "id": "jsdoc-generator",
       "name": "JSDoc Generator",
       "category": "documentation",
@@ -227,58 +261,46 @@
       "status": "stable"
     },
     {
-      "id": "font-download",
-      "name": "Font Downloader (Pretendard)",
-      "category": "frontend",
-      "path": "skills/frontend/font-download",
-      "version": "1.0.0",
-      "status": "stable"
-    }
-  ],
-  "agents": [
+      "type": "command",
+      "id": "analyze",
+      "name": "analyze",
+      "path": "commands/analyze.md",
+      "description": "Comprehensive code quality analysis"
+    },
     {
+      "type": "command",
+      "id": "deploy",
+      "name": "deploy",
+      "path": "commands/deploy.md",
+      "description": "Automated deployment with environment-specific configurations"
+    },
+    {
+      "type": "command",
+      "id": "test",
+      "name": "test",
+      "path": "commands/test.md",
+      "description": "Execute tests with coverage analysis"
+    },
+    {
+      "type": "agent",
       "id": "backend-architect",
       "name": "Backend Architect",
       "path": "agents/backend-architect",
       "version": "1.0.0"
     },
     {
+      "type": "agent",
       "id": "performance-engineer",
       "name": "Performance Engineer",
       "path": "agents/performance-engineer",
       "version": "1.0.0"
     },
     {
+      "type": "agent",
       "id": "security-auditor",
       "name": "Security Auditor",
       "path": "agents/security-auditor",
       "version": "1.0.0"
-    }
-  ],
-  "commands": [
-    {
-      "id": "analyze",
-      "name": "analyze",
-      "description": "Comprehensive code quality analysis",
-      "path": "commands/analyze.md"
-    },
-    {
-      "id": "deploy",
-      "name": "deploy",
-      "description": "Automated deployment with environment-specific configurations",
-      "path": "commands/deploy.md"
-    },
-    {
-      "id": "test",
-      "name": "test",
-      "description": "Execute tests with coverage analysis",
-      "path": "commands/test.md"
-    },
-    {
-      "id": "font",
-      "name": "font",
-      "description": "Download Pretendard fonts with automatic path detection",
-      "path": "commands/font.md"
     }
   ],
   "settings": {
