@@ -9,26 +9,34 @@
 
 ## 🚀 Quick Install
 
-### macOS / Linux
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/softwayapp/market-place/main/install.sh | bash
-```
-
 ### Windows (PowerShell)
 
 ```powershell
-irm https://raw.githubusercontent.com/softwayapp/market-place/main/install.ps1 | iex
+# Download and run global installation script
+irm https://raw.githubusercontent.com/softwayapp/market-place/main/install-global-skills.ps1 | iex
+```
+
+### macOS / Linux
+
+```bash
+# Download and run global installation script
+curl -fsSL https://raw.githubusercontent.com/softwayapp/market-place/main/install-global-skills.sh | bash
 ```
 
 ### Manual Installation
 
 ```bash
-# Clone to Claude Code plugins directory
-git clone https://github.com/softwayapp/market-place.git ~/.claude/plugins/softwayapp-marketplace
+# Clone repository
+git clone https://github.com/softwayapp/market-place.git
 
-# Restart Claude Code
+# Run installation script
+cd market-place
+bash install-global-skills.sh      # macOS/Linux
+# or
+powershell -File install-global-skills.ps1  # Windows
 ```
+
+**No restart required!** All commands and skills are immediately available.
 
 ---
 
@@ -95,37 +103,51 @@ git clone https://github.com/softwayapp/market-place.git ~/.claude/plugins/softw
 
 ## 💻 Usage
 
-### Font Download Example
+### Commands
 
 ```bash
-# Auto-detect project type and download
-/font
+# Download fonts
+/font                  # Auto-detect project type
+/font public/fonts     # Custom path
 
-# Custom path
-/font public/fonts
+# Code analysis
+/analyze              # Analyze current file
+/analyze --full       # Full project analysis
 
-# Natural language
-"Download Pretendard fonts"
+# Testing
+/test                 # Run all tests
+/test --coverage      # With coverage report
+
+# Deployment
+/deploy               # Automated deployment
+/deploy --env prod    # Specific environment
 ```
 
-### Code Analysis Example
+### Skills
 
 ```bash
-# Analyze current file
-/analyze
+# Backend development
+@api-generator users
+@database-migration create_users_table
+@clean-architecture-scaffolder my-app
 
-# Full project analysis
-/analyze --full
-```
+# Frontend development
+@font-download
+@component-generator Button
+@accessibility-audit
 
-### Test Execution Example
+# DevOps
+@ci-cd-setup
+@docker-optimizer
+@k8s-deployment
 
-```bash
-# Run all tests
-/test
+# Security
+@vulnerability-scan
+@secrets-detection
 
-# With coverage
-/test --coverage
+# Testing
+@test-generator UserService
+@e2e-test-builder login-flow
 ```
 
 ---
@@ -133,41 +155,44 @@ git clone https://github.com/softwayapp/market-place.git ~/.claude/plugins/softw
 ## 🔄 Update
 
 ```bash
-cd ~/.claude/plugins/softwayapp-marketplace
+cd market-place
 git pull origin main
-```
 
-Then restart Claude Code.
+# Run installation script again
+bash install-global-skills.sh      # macOS/Linux
+# or
+powershell -File install-global-skills.ps1  # Windows
+```
 
 ---
 
 ## 📚 Documentation
 
-### Skill Categories
-
-Explore skills by browsing the `skills/` directory:
+### Project Structure
 
 ```
-skills/
-├── backend/       # Backend development
-├── frontend/      # Frontend development
-├── devops/        # DevOps automation
-├── security/      # Security tools
-├── quality/       # Code quality
-└── documentation/ # Documentation generation
+market-place/
+├── skills/            # 32+ skills organized by category
+│   ├── backend/       # Backend development skills
+│   ├── frontend/      # Frontend development skills
+│   ├── devops/        # DevOps automation skills
+│   ├── security/      # Security tools
+│   ├── quality/       # Code quality skills
+│   └── documentation/ # Documentation generation
+├── commands/          # 4 slash commands
+├── agents/            # 3 specialized agents
+└── install-global-skills.*  # Installation scripts
 ```
 
-### Command Reference
+### Installation Method
 
-All commands are in `commands/`:
+This marketplace uses **global installation** instead of the Claude Code plugin system:
 
-```
-commands/
-├── font.md     # Font downloader
-├── analyze.md  # Code analyzer
-├── test.md     # Test runner
-└── deploy.md   # Deployment automation
-```
+- ✅ **Commands** → Copied to `~/.claude/commands/`
+- ✅ **Skills** → Copied to `~/.claude/skills/`
+- ✅ **No restart required** → Immediately available
+- ✅ **Works on all computers** → No plugin registration needed
+- ✅ **Easy updates** → Just re-run installation script
 
 ---
 
