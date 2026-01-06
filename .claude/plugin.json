@@ -37,6 +37,26 @@
     "test": {
       "description": "Run comprehensive test suite with coverage analysis and reporting",
       "file": "./commands/test.md"
+    },
+    "github:issue": {
+      "description": "Create GitHub issue with auto type detection (bug/feature/task)",
+      "file": "./commands/github/issue.md"
+    },
+    "github:pr": {
+      "description": "Intelligent PR workflow - Test/Build/Lint → Auto-classify → Branch separation → PR creation → Merge → Cleanup",
+      "file": "./commands/github/pr.md"
+    },
+    "init:expo": {
+      "description": "Initialize Expo project with setup guide",
+      "file": "./commands/init/expo.md"
+    },
+    "init:next": {
+      "description": "Initialize Next.js project with setup guide",
+      "file": "./commands/init/next.md"
+    },
+    "init:react": {
+      "description": "Initialize React project with auto library setup and CLAUDE.md",
+      "file": "./commands/init/react.md"
     }
   },
   "skills": {

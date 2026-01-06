@@ -23,10 +23,11 @@ const plugin = {
   skills: {}
 };
 
-// Find all command files
+// Find all command files (including subdirectories)
 const commandsDir = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsDir).filter(f => f.endsWith('.md'));
 
+// Process top-level command files
+const commandFiles = fs.readdirSync(commandsDir).filter(f => f.endsWith('.md'));
 commandFiles.forEach(file => {
   const name = path.basename(file, '.md');
   const content = fs.readFileSync(path.join(commandsDir, file), 'utf8');
@@ -42,6 +43,35 @@ commandFiles.forEach(file => {
       file: './commands/' + file
     };
   }
+});
+
+// Process subdirectory command files (github, init, etc.)
+const subdirs = fs.readdirSync(commandsDir).filter(item => {
+  const fullPath = path.join(commandsDir, item);
+  return fs.statSync(fullPath).isDirectory();
+});
+
+subdirs.forEach(subdir => {
+  const subdirPath = path.join(commandsDir, subdir);
+  const subFiles = fs.readdirSync(subdirPath).filter(f => f.endsWith('.md'));
+
+  subFiles.forEach(file => {
+    const name = path.basename(file, '.md');
+    const content = fs.readFileSync(path.join(subdirPath, file), 'utf8');
+    const match = content.match(/^---\s*\n([\s\S]*?)\n---/);
+
+    if (match) {
+      const frontmatter = match[1];
+      const descMatch = frontmatter.match(/description:\s*(.+)/);
+      const description = descMatch ? descMatch[1].trim() : subdir + ':' + name + ' command';
+
+      // Use colon notation for subcommands (e.g., "init:expo", "github:issue")
+      plugin.commands[subdir + ':' + name] = {
+        description,
+        file: './commands/' + subdir + '/' + file
+      };
+    }
+  });
 });
 
 // Find all skill directories
