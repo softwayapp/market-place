@@ -13,9 +13,156 @@
     "url": "https://github.com/softwayapp/market-place"
   },
   "license": "MIT",
-  "keywords": ["development", "automation", "skills", "enterprise", "marketplace"],
+  "keywords": [
+    "development",
+    "automation",
+    "skills",
+    "enterprise",
+    "marketplace"
+  ],
   "main": "./",
-  "commandsDir": "./commands",
-  "skillsDir": "./skills",
-  "agentsDir": "./agents"
+  "commands": {
+    "analyze": {
+      "description": "Comprehensive code quality analysis with actionable insights",
+      "file": "./commands/analyze.md"
+    },
+    "deploy": {
+      "description": "Automated deployment with environment-specific configurations and rollback support",
+      "file": "./commands/deploy.md"
+    },
+    "font": {
+      "description": "Download Pretendard font variants (Regular, Medium, SemiBold, Bold) with automatic path detection",
+      "file": "./commands/font.md"
+    },
+    "test": {
+      "description": "Run comprehensive test suite with coverage analysis and reporting",
+      "file": "./commands/test.md"
+    }
+  },
+  "skills": {
+    "api-generator": {
+      "description": "Generate NestJS modules with Clean Architecture, CQRS patterns, and automatic API documentation",
+      "path": "./skills/backend/api-generator"
+    },
+    "clean-architecture-scaffolder": {
+      "description": "Generate complete Clean Architecture project structure for NestJS with 4-layer separation (API, Application, Domain, Infrastructure)",
+      "path": "./skills/backend/clean-architecture-scaffolder"
+    },
+    "cqrs-generator": {
+      "description": "Automatically generate CQRS pattern files (Commands, Queries, Events, Handlers) for NestJS applications",
+      "path": "./skills/backend/cqrs-generator"
+    },
+    "database-migration": {
+      "description": "Generate database migrations for NestJS with Prisma, TypeORM, and automated rollback support",
+      "path": "./skills/backend/database-migration"
+    },
+    "error-handler": {
+      "description": "Apply consistent error handling patterns with NestJS Exception Filters, logging, and monitoring integration",
+      "path": "./skills/backend/error-handler"
+    },
+    "performance-optimizer": {
+      "description": "Analyze and optimize NestJS backend performance with Interceptors, Cache Manager, and database query optimization",
+      "path": "./skills/backend/performance-optimizer"
+    },
+    "ci-cd-setup": {
+      "description": "Automatically configure CI/CD pipelines for GitHub Actions, GitLab CI, or Jenkins",
+      "path": "./skills/devops/ci-cd-setup"
+    },
+    "docker-optimizer": {
+      "description": "Optimize Docker images for size, security, and build performance",
+      "path": "./skills/devops/docker-optimizer"
+    },
+    "k8s-deployment": {
+      "description": "Generate Kubernetes manifests and Helm charts with best practices",
+      "path": "./skills/devops/k8s-deployment"
+    },
+    "monitoring-setup": {
+      "description": "Setup monitoring stack with Prometheus, Grafana, and alerting",
+      "path": "./skills/devops/monitoring-setup"
+    },
+    "project-init-pipeline": {
+      "description": "Automated project initialization pipeline for Expo and Next.js with Atomic Design structure, dependency management, and folder documentation",
+      "path": "./skills/devops/project-init-pipeline"
+    },
+    "api-docs-generator": {
+      "description": "Generate API documentation from OpenAPI/Swagger specs or code comments",
+      "path": "./skills/documentation/api-docs-generator"
+    },
+    "changelog-generator": {
+      "description": "Generate and maintain CHANGELOG.md from git commits and conventional commits",
+      "path": "./skills/documentation/changelog-generator"
+    },
+    "jsdoc-generator": {
+      "description": "Generate comprehensive JSDoc/TSDoc documentation for code",
+      "path": "./skills/documentation/jsdoc-generator"
+    },
+    "readme-generator": {
+      "description": "Generate comprehensive README.md with badges, installation, usage, and examples",
+      "path": "./skills/documentation/readme-generator"
+    },
+    "accessibility-audit": {
+      "description": "Automated WCAG 2.1 accessibility audit with a11y best practices and ARIA validation",
+      "path": "./skills/frontend/accessibility-audit"
+    },
+    "component-generator": {
+      "description": "Generate React/Vue components with TypeScript, styled-components, and storybook integration",
+      "path": "./skills/frontend/component-generator"
+    },
+    "font-download": {
+      "description": "Download Pretendard font variants (Regular, Medium, SemiBold, Bold) to specified directory with parallel download optimization",
+      "path": "./skills/frontend/font-download"
+    },
+    "responsive-design": {
+      "description": "Apply responsive design patterns with mobile-first approach and breakpoint management",
+      "path": "./skills/frontend/responsive-design"
+    },
+    "state-management": {
+      "description": "Implement state management patterns with React Context, Zustand, or Redux Toolkit",
+      "path": "./skills/frontend/state-management"
+    },
+    "github:issue": {
+      "description": "Create GitHub issue with auto type detection (bug/feature/task)",
+      "path": "./skills/github/issue"
+    },
+    "github:pr": {
+      "description": "Intelligent PR workflow - Test/Build/Lint → Auto-classify → Branch separation → PR creation → Merge → Cleanup",
+      "path": "./skills/github/pr"
+    },
+    "coverage-analyzer": {
+      "description": "Analyze test coverage and identify untested code paths with visualization",
+      "path": "./skills/quality/coverage-analyzer"
+    },
+    "e2e-test-builder": {
+      "description": "Build end-to-end test scenarios with Playwright or Cypress",
+      "path": "./skills/quality/e2e-test-builder"
+    },
+    "mock-data-generator": {
+      "description": "Generate realistic mock data for testing with Faker.js and JSON Schema",
+      "path": "./skills/quality/mock-data-generator"
+    },
+    "test-generator": {
+      "description": "Automatically generate unit and integration tests with Jest, Vitest, or Mocha",
+      "path": "./skills/quality/test-generator"
+    },
+    "code-security-audit": {
+      "description": "Comprehensive code security audit with SAST and secure coding practices validation",
+      "path": "./skills/security/code-security-audit"
+    },
+    "dependency-check": {
+      "description": "Check dependencies for known vulnerabilities (CVE) with automated updates",
+      "path": "./skills/security/dependency-check"
+    },
+    "secrets-detection": {
+      "description": "Detect hardcoded secrets, API keys, and credentials in code and git history",
+      "path": "./skills/security/secrets-detection"
+    },
+    "vulnerability-scan": {
+      "description": "Automated OWASP Top 10 vulnerability scanning with security best practices",
+      "path": "./skills/security/vulnerability-scan"
+    },
+    "setup-executor": {
+      "description": "Parse claude.md and execute setup instructions automatically",
+      "path": "./skills/setup-executor"
+    }
+  }
 }
