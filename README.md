@@ -7,21 +7,23 @@
 
 ---
 
-## 🚀 Quick Install
+## 🚀 Quick Install (One-Line Installation)
 
-### Windows (PowerShell)
+### Windows (PowerShell - Run as Administrator)
 
 ```powershell
-# Download and run global installation script
-irm https://raw.githubusercontent.com/softwayapp/market-place/main/install-global-skills.ps1 | iex
+# Quick installation (recommended)
+irm https://raw.githubusercontent.com/softwayapp/market-place/main/quick-install.ps1 | iex
 ```
 
 ### macOS / Linux
 
 ```bash
-# Download and run global installation script
-curl -fsSL https://raw.githubusercontent.com/softwayapp/market-place/main/install-global-skills.sh | bash
+# Quick installation (recommended)
+curl -fsSL https://raw.githubusercontent.com/softwayapp/market-place/main/quick-install.sh | bash
 ```
+
+**✅ Installation complete in ~30 seconds! No restart required.**
 
 ### Manual Installation
 
@@ -36,7 +38,7 @@ bash install-global-skills.sh      # macOS/Linux
 powershell -File install-global-skills.ps1  # Windows
 ```
 
-**No restart required!** All commands and skills are immediately available.
+**📖 Detailed installation guide**: See [INSTALLATION-GUIDE.md](INSTALLATION-GUIDE.md) for troubleshooting, offline installation, team deployment, and more.
 
 ---
 

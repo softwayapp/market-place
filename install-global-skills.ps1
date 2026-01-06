@@ -48,14 +48,27 @@ foreach ($category in $categories) {
     }
 }
 
-# Copy all commands
+# Copy all commands (including subdirectories)
 Write-Host "📋 Copying commands..." -ForegroundColor Cyan
 $commandsCopied = 0
 $commandsPath = Join-Path $TEMP_DIR "commands"
+
 if (Test-Path $commandsPath) {
+    # Copy all .md files in commands directory
     Get-ChildItem -Path $commandsPath -Filter "*.md" -ErrorAction SilentlyContinue | ForEach-Object {
         Copy-Item -Path $_.FullName -Destination $COMMANDS_DIR -Force -ErrorAction SilentlyContinue
         $commandsCopied++
+    }
+
+    # Copy all subdirectories (github, init, etc.)
+    Get-ChildItem -Path $commandsPath -Directory -ErrorAction SilentlyContinue | ForEach-Object {
+        $destDir = Join-Path $COMMANDS_DIR $_.Name
+        if (Test-Path $destDir) {
+            Remove-Item -Path $destDir -Recurse -Force -ErrorAction SilentlyContinue
+        }
+        Copy-Item -Path $_.FullName -Destination $destDir -Recurse -Force -ErrorAction SilentlyContinue
+        $subCommandCount = (Get-ChildItem -Path $_.FullName -Filter "*.md" -Recurse).Count
+        $commandsCopied += $subCommandCount
     }
 }
 
@@ -65,7 +78,7 @@ Remove-Item -Path $TEMP_DIR -Recurse -Force -ErrorAction SilentlyContinue
 
 # Count installed items
 $skillCount = (Get-ChildItem -Path $SKILLS_DIR -Recurse -Filter "SKILL.md" -ErrorAction SilentlyContinue).Count
-$commandCount = (Get-ChildItem -Path $COMMANDS_DIR -Filter "*.md" -ErrorAction SilentlyContinue).Count
+$commandCount = (Get-ChildItem -Path $COMMANDS_DIR -Recurse -Filter "*.md" -ErrorAction SilentlyContinue).Count
 
 Write-Host ""
 Write-Host "✅ Installation complete!" -ForegroundColor Green
@@ -78,6 +91,8 @@ Write-Host "   • /font - Download Pretendard fonts"
 Write-Host "   • /analyze - Code quality analysis"
 Write-Host "   • /test - Run tests with coverage"
 Write-Host "   • /deploy - Deployment automation"
+Write-Host "   • /init:expo, /init:next, /init:react - Project initialization"
+Write-Host "   • /github:issue, /github:pr - GitHub operations"
 Write-Host ""
 Write-Host "📦 Available skills include:" -ForegroundColor Cyan
 Write-Host "   • @api-generator, @clean-architecture-scaffolder, @database-migration"
@@ -88,4 +103,4 @@ Write-Host "   • @test-generator, @e2e-test-builder, @coverage-analyzer"
 Write-Host ""
 Write-Host "🎯 Ready to use - no restart needed!" -ForegroundColor Yellow
 Write-Host ""
-Write-Host "Try it now: Type '/font' or '@font-download' in Claude Code" -ForegroundColor Cyan
+Write-Host "Try it now: Type '/font' or '/init:expo' or '@font-download' in Claude Code" -ForegroundColor Cyan
