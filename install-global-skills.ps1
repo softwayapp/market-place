@@ -4,7 +4,8 @@ $ErrorActionPreference = "Stop"
 
 $SKILLS_DIR = "$env:USERPROFILE\.claude\skills"
 $COMMANDS_DIR = "$env:USERPROFILE\.claude\commands"
-$MARKETPLACE_DIR = $PSScriptRoot
+$REPO_URL = "https://github.com/softwayapp/market-place.git"
+$TEMP_DIR = "$env:TEMP\market-place-temp"
 
 Write-Host "🚀 Installing marketplace skills and commands to global Claude Code directory..." -ForegroundColor Cyan
 Write-Host ""
@@ -13,26 +14,49 @@ Write-Host ""
 New-Item -ItemType Directory -Force -Path $SKILLS_DIR | Out-Null
 New-Item -ItemType Directory -Force -Path $COMMANDS_DIR | Out-Null
 
+# Clone repository to temp directory
+Write-Host "⬇️  Downloading marketplace..." -ForegroundColor Cyan
+if (Test-Path $TEMP_DIR) {
+    Remove-Item -Path $TEMP_DIR -Recurse -Force
+}
+git clone --depth 1 $REPO_URL $TEMP_DIR 2>&1 | Out-Null
+
+if (-not (Test-Path $TEMP_DIR)) {
+    Write-Host "❌ Failed to download marketplace. Please check your internet connection." -ForegroundColor Red
+    exit 1
+}
+
 # Copy all skills
 Write-Host "📦 Copying skills..." -ForegroundColor Cyan
-@("backend", "frontend", "devops", "security", "quality", "documentation") | ForEach-Object {
-    $categoryPath = Join-Path $MARKETPLACE_DIR "skills\$_"
+$categories = @("backend", "frontend", "devops", "security", "quality", "documentation")
+foreach ($category in $categories) {
+    $categoryPath = Join-Path $TEMP_DIR "skills\$category"
     if (Test-Path $categoryPath) {
         Get-ChildItem -Path $categoryPath -Directory | ForEach-Object {
-            Copy-Item -Path $_.FullName -Destination $SKILLS_DIR -Recurse -Force
+            $destPath = Join-Path $SKILLS_DIR $_.Name
+            if (Test-Path $destPath) {
+                Remove-Item -Path $destPath -Recurse -Force
+            }
+            Copy-Item -Path $_.FullName -Destination $destPath -Recurse -Force
         }
     }
 }
 
 # Copy all commands
 Write-Host "📋 Copying commands..." -ForegroundColor Cyan
-Get-ChildItem -Path (Join-Path $MARKETPLACE_DIR "commands") -Filter "*.md" | ForEach-Object {
-    Copy-Item -Path $_.FullName -Destination $COMMANDS_DIR -Force
+$commandsPath = Join-Path $TEMP_DIR "commands"
+if (Test-Path $commandsPath) {
+    Get-ChildItem -Path $commandsPath -Filter "*.md" | ForEach-Object {
+        Copy-Item -Path $_.FullName -Destination $COMMANDS_DIR -Force
+    }
 }
 
+# Clean up temp directory
+Remove-Item -Path $TEMP_DIR -Recurse -Force -ErrorAction SilentlyContinue
+
 # Count installed items
-$skillCount = (Get-ChildItem -Path $SKILLS_DIR -Recurse -Filter "SKILL.md").Count
-$commandCount = (Get-ChildItem -Path $COMMANDS_DIR -Filter "*.md").Count
+$skillCount = (Get-ChildItem -Path $SKILLS_DIR -Recurse -Filter "SKILL.md" -ErrorAction SilentlyContinue).Count
+$commandCount = (Get-ChildItem -Path $COMMANDS_DIR -Filter "*.md" -ErrorAction SilentlyContinue).Count
 
 Write-Host ""
 Write-Host "✅ Installation complete!" -ForegroundColor Green
